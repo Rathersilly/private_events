@@ -1,0 +1,6 @@
+<% Event.all.each do |event| %>
+  <%= content_tag(:div, "Host: #{event.host}") %>
+  <%= content_tag(:div, "Place: #{event.place}") %>
+  <%= content_tag(:div, "Time: #{event.time}") %>
+<% end %>
+

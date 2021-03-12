@@ -1,0 +1,10 @@
+<%= form_with(model: @event) do |form| %>
+  <%# form.label :host %>
+  <%# form.text_field :host %>
+  <%= form.collection_select :host_id, User.all, :id, :name %>
+  <%= form.label :place %>
+  <%= form.text_field :place %>
+  <%= form.datetime_select :time %>
+  <%= form.submit "Create Event" %>
+<% end %>
+

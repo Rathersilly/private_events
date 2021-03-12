@@ -11,6 +11,19 @@
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
+    <% flash.each do |msg_type, msg| %>
+      <%= content_tag(:div, "#{msg}, #{msg_type}") %>
+    <% end %>
+    <aside>
+      <h4>Currently logged in: </h4>
+      <% if logged_in? %>
+      <%= current_user.name %>
+    <% else %>
+      <%= "Nobody" %>
+    <% end %>
+      <%= params.inspect %>
+    </aside>
     <%= yield %>
   </body>
 </html>

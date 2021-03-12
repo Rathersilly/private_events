@@ -1,0 +1,10 @@
+<header> 
+
+  <%= link_to "Event Maker Thing", root_path %>
+  <% if logged_in? %>
+    <%= link_to "Log out", logout_path %>
+  <% else %>
+    <%= link_to "Log in", login_path %>
+    <%= link_to "Sign up", signup_path %>
+  <% end %>
+</header>
