@@ -1,3 +1,49 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  height: 50px;
+  background-color: black;
+  color: white;
+}
+header > a:visited {
+  color: white;
+  text-decoration: none;
+}
+.navright > a:visited {
+  color: white;
+  text-decoration: none;
+}
+.navright {
+  display: flex;
+  float: right;
+}
+.navright > * {
+  margin: 10px;
+}
+.flash {
+  font-size: 16px;
+  font-weight: bold;
+}
+.flash_warning {
+  color: red;
+}
+.flash_danger {
+  color: red;
+}
+.flash_success {
+  color: green;
+}
+aside { 
+  position: absolute;
+  right: 0;
+  top: 50px;
+  width: 30%;
+}
+aside > * {
+  font-size: 16px;
+}

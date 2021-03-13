@@ -1,7 +1,9 @@
 <%= form_with(model: @event) do |form| %>
   <%# form.label :host %>
   <%# form.text_field :host %>
-  <%= form.collection_select :host_id, User.all, :id, :name %>
+  <%# form.collection_select :host_id, User.all, :id, :name %>
+  <%= form.label :event_name %>
+  <%= form.text_field :event_name %>
   <%= form.label :place %>
   <%= form.text_field :place %>
   <%= form.datetime_select :time %>

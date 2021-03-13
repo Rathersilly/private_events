@@ -9,6 +9,12 @@
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
+<h1><%= @user.name %>'s events</h1>
+<% @user.events.each do |event| %>
+  <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
+  <%= link_to "Event page", event_path %>
+
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

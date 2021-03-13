@@ -13,12 +13,12 @@
   <body>
     <%= render 'layouts/header' %>
     <% flash.each do |msg_type, msg| %>
-      <%= content_tag(:div, "#{msg}, #{msg_type}") %>
+      <%= content_tag(:div, "#{msg_type.capitalize}: #{msg}" , class: "flash flash_#{msg_type}") %>
     <% end %>
     <aside>
       <h4>Currently logged in: </h4>
       <% if logged_in? %>
-      <%= current_user.name %>
+        <%= current_user.name %><br></br>
     <% else %>
       <%= "Nobody" %>
     <% end %>

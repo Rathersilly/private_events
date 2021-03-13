@@ -1,3 +1,6 @@
 class Event < ApplicationRecord
-  belongs_to :host, class_name: "User"
+  belongs_to :host, class_name: "User", foreign_key: "host_id"
+  #belongs_to :host, class_name: "User", foreign_key: { to_table: :users }
+  #has_many :invitees, class_name: "User", foreign_key: { to_table: :users }
+  #belongs_to :host, inverse_of: :User, foreign_key: "host_id"
 end

@@ -1,7 +1,5 @@
-<% Event.all.each do |event| %>
   <%= content_tag(:div, "Host: #{event.host.name}") %>
   <%= content_tag(:div, "Name: #{event.name}") %>
   <%= content_tag(:div, "Place: #{event.place}") %>
   <%= content_tag(:div, "Time: #{event.time}") %>
-  <%= link_to "Event page", event_path(event.id) %>
-<% end %>
+

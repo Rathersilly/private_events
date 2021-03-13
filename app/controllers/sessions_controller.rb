@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
   def new
   end
   def create
     user = User.find_by(email: session_params[:email])
     if user && user.authenticate(params[:session][:password])
+      flash[:success] = "Welcome #{user.name}!"
       log_in user
       redirect_to root_path
     else
