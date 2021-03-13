@@ -18,12 +18,15 @@
     <aside>
       <h4>Currently logged in: </h4>
       <% if logged_in? %>
-        <%= current_user.name %><br></br>
+        <%= content_tag(:div, current_user.name) %>
     <% else %>
-      <%= "Nobody" %>
+      <%= content_tag(:div, "Nobody") %>
     <% end %>
-      <%= params.inspect %>
+      <br>
+      <%= content_tag(:div, params.inspect) %>
     </aside>
+    <section>
     <%= yield %>
+    </section>
   </body>
 </html>

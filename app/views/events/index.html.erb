@@ -1,7 +1,9 @@
 <% Event.all.each do |event| %>
+  <%= link_to(event_path(event.id), class: "event-link") do %>
   <%= content_tag(:div, "Host: #{event.host.name}") %>
   <%= content_tag(:div, "Name: #{event.name}") %>
   <%= content_tag(:div, "Place: #{event.place}") %>
   <%= content_tag(:div, "Time: #{event.time}") %>
-  <%= link_to "Event page", event_path(event.id) %>
+<% end %>
+  <%#= link_to "Event page", event_path(event.id) %>
 <% end %>

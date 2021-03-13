@@ -3,6 +3,7 @@
   <%= form.label :email %>
   <%= form.text_field :email %>
 
+  <%= link_to "HAX", login_path(params: { session: {email: "asdf", password: "asdf"}}), method: :post, class: "HAX" %>
   <%= form.label :password %>
   <%= form.password_field :password %>
 

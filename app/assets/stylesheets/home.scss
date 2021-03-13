@@ -1,31 +1,60 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-
+:root {
+  --header-height: 50px;
+}
 header {
   width: 100%;
   position: fixed;
   top: 0;
-  height: 50px;
+  height: var(--header-height);
   background-color: black;
   color: white;
+  font-size: 16px;
 }
 header > a:visited {
   color: white;
   text-decoration: none;
 }
-.navright > a:visited {
+.navleft {
+  float:left;
+  display: flex;
+  align-items: center;
+  width: 30%;
+  color: white;
+  margin-left: 10%;
+  text-decoration: none;
+  height: 100%;
+
+}
+.navleft > * {
+
+  margin: 10px;
+  text-decoration: none;
+}
+.navleft > a:visited {
   color: white;
   text-decoration: none;
 }
 .navright {
+  height: 100%;
+  margin-right: 40px;
   display: flex;
+  align-items: center;
   float: right;
+}
+.navright > a:visited {
+  color: white;
+  text-decoration: none;
 }
 .navright > * {
   margin: 10px;
+  text-decoration: none;
 }
 .flash {
+  position: relative;
+  top: var(--header-height);
   font-size: 16px;
   font-weight: bold;
 }
@@ -39,11 +68,39 @@ header > a:visited {
   color: green;
 }
 aside { 
+  margin: 5px;
+  padding: 10px;
+  border: 2px solid black;
+  background-color: beige;
   position: absolute;
   right: 0;
-  top: 50px;
+  top: var(--header-height);
   width: 30%;
 }
 aside > * {
   font-size: 16px;
 }
+section {
+  position:relative;
+  top: var(--header-height);
+  margin: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+section > form {
+  position: relative;
+}
+.home_links {
+  width: 60%;
+}
+.home_links > * {
+  display: block;
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px;
+  font-size: 24px;
+}
+.home_links > a:visited {
+  text-decoration: none;
+}
+
