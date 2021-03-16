@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show, edit, update, destroy]
-  before_action :correct_user, only: %i[edit, update, destroy]
+  before_action :set_event, only: %i[show edit update destroy]
+  before_action :correct_user, only: %i[edit update destroy]
+  before_action :logged_in_user, only: %i[new edit update destroy]
+  
   def new
     @event = Event.new
   end
@@ -13,6 +15,17 @@ class EventsController < ApplicationController
       render 'new'
     end
   end
+  def edit
+  end
+  def update
+    puts @event.inspect.to_s.green
+    if @event.update(event_params)
+      render :show, status: :ok, location: @user
+    else
+      render :edit, status: :unprocessable_entity
+    end
+      
+  end
   def show
     @event = Event.find(params[:id])
     @host = User.find(@event.host_id)
@@ -22,6 +35,7 @@ class EventsController < ApplicationController
   end
 
   private
+
   def set_event
     @event = Event.find(params[:id])
   end

@@ -1,0 +1,14 @@
+<%= form_with(model: @event, url: path_name, method: method_name) do |form| %>
+  <%# form.label :host %>
+  <%# form.text_field :host %>
+  <%# form.collection_select :host_id, User.all, :id, :name %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :place %>
+  <%= form.text_field :place %>
+  <br>
+  <%= form.datetime_select :time %>
+  <%= form.submit submit_msg %>
+<% end %>
+
+

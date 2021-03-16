@@ -1,0 +1,10 @@
+<h2>Choose someone to invite to </h2>
+
+<%= form_with(model: Invitation) do |form| %>
+  <%= form.label "Users" %>
+  <%= form.collection_select :invitee_id, User.all, :id, :name %>
+  <%= form.label "#{@event.id}" %>
+  <%= form.hidden_field(:event_id, value: @event.id) %>
+  <%= form.hidden_field(:host_id, value: @host.id) %>
+  <%= form.submit "Invite!" %>
+<% end %>

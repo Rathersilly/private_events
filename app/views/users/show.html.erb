@@ -12,7 +12,12 @@
 <h1><%= @user.name %>'s events</h1>
 <% @user.events.each do |event| %>
   <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
+  <h4>Invited people:</h4>
+  <% event.invitees.each do |invitee| %>
+    <%= content_tag(:div, "#{invitee.name}") %>
+  <% end %>
   <%= link_to "Event page", event_path %>
+  <br>
 
 <% end %>
 

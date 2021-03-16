@@ -3,4 +3,6 @@
 
 <% if @event.host == current_user %>
   <%= link_to "Edit this event", edit_event_path(@event.id) %>
+  <br>
+  <%= link_to "Invite somebody!", new_invitation_path(params: {event_id: @event.id, host: @event.host })  %>
 <% end %>

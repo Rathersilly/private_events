@@ -5,6 +5,7 @@ ruby '3.0.0'
 
 # required for tests to work - else bootsnap throws errors
 gem 'rexml'
+gem 'colorize'
 
 gem 'faker'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
