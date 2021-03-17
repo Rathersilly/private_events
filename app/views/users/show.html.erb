@@ -1,5 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<div>
+  <h3>Pending invitations:</h3>
+  <% @user.pending.each do |invitation| %>
+    <%= render partial: "events/event", locals: {event: invitation.event} %>
+    <%= link_to "Accept", accept_path(invitation.id), method: :patch %>
+  <% end %>
+</div>
 <p>
   <strong>Name:</strong>
   <%= @user.name %>
@@ -9,17 +16,29 @@
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
-<h1><%= @user.name %>'s events</h1>
+<h1><%= @user.name %>'s hosted events</h1>
 <% @user.events.each do |event| %>
   <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
-  <h4>Invited people:</h4>
-  <% event.invitees.each do |invitee| %>
-    <%= content_tag(:div, "#{invitee.name}") %>
-  <% end %>
+  <%= render partial: "events/invited", locals: { event: event } %>
   <%= link_to "Event page", event_path %>
   <br>
-
+<% end %>
+<h1><%= @user.name %>'s accepted invitations</h1>
+<% @user.accepted.each do |inv| %>
+  <% event = inv.event %>
+  <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
+  <%= link_to "Unaccept Event", unaccept_path(inv), method: :patch %>
+  <%= link_to "Event page", event_path %>
+  <br>
+<% end %>
+<h1><%= @user.name %>'s pending events</h1>
+<% @user.pending.each do |inv| %>
+  <% event = inv.event %>
+  <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
+  <%= link_to "Accept Event", accept_path(inv), method: :patch %>
+  <%= link_to "Event page", event_path, method: :patch %>
+  <br>
 <% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', users_path %> 

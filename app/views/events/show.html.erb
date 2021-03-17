@@ -1,5 +1,8 @@
 
 <%= render @event %>
+<%= render partial: "invited", locals: {event: @event} %>
+
+
 
 <% if @event.host == current_user %>
   <%= link_to "Edit this event", edit_event_path(@event.id) %>

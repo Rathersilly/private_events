@@ -1,0 +1,15 @@
+<h2>Invited People:</h2>
+<table>
+  <tr>
+  <th>Person</th>
+  <th>Accepted</th>
+  </tr>
+  <% event.invitations.each do |invitation| %>
+    <tr>
+      <td><%= invitation.invitee.name %></td>
+      <td><%= invitation.accepted %></td>
+    </tr>
+
+  <% end %>
+<table>
+

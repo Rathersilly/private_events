@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: %i[ show edit update destroy ]
+  before_action :set_invitation, only: %i[ accept unaccept show edit update destroy ]
   def new
     @invitation = Invitation.new
     @event = Event.find(params[:event_id])
@@ -20,10 +20,25 @@ class InvitationsController < ApplicationController
   def edit
   end
   def update
-    if @invitation.update(invitation_params)
-      render :show, status: :ok, location: @user
+  end
+  def accept
+    invitee = @invitation.invitee
+    if @invitation.update(accepted: true)
+      flash[:success] = "Accepted invitation!"
+      redirect_to user_path(invitee)
     else
-      render :edit, status: :unprocessable_entity
+      flash[:warning] = "could not accept for some reason"
+      redirect_to user_path(invitee)
+    end
+  end
+  def unaccept
+    invitee = @invitation.invitee
+    if @invitation.update(accepted: false)
+      flash[:success] = "Unaccepted invitation!"
+      redirect_to user_path(invitee)
+    else
+      flash[:warning] = "could not accept for some reason"
+      redirect_to user_path(invitee)
     end
   end
 

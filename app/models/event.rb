@@ -6,4 +6,5 @@ class Event < ApplicationRecord
   belongs_to :host, class_name: "User", foreign_key: "host_id"
   has_many :invitations
   has_many :invitees, class_name: "User", through: :invitations, foreign_key: "invitee_id"
+
 end
