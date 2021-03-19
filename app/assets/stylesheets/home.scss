@@ -76,6 +76,7 @@ aside {
   right: 0;
   top: var(--header-height);
   width: 30%;
+  z-index: 100;
 }
 aside > * {
   font-size: 16px;

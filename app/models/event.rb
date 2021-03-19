@@ -7,4 +7,14 @@ class Event < ApplicationRecord
   has_many :invitations
   has_many :invitees, class_name: "User", through: :invitations, foreign_key: "invitee_id"
 
-end
+  scope :previous, -> { where("time < ?", DateTime.now) }
+  scope :upcoming, -> { where("time > ?", DateTime.now) }
+
+  def past?
+    time < DateTime.now
+  end
+
+  def future?
+    time > DateTime.now
+  end
+end 

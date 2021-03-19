@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<div>
+<div class="userinfo">
   <h3>Pending invitations:</h3>
+  <% if @user.pending.empty? %>
+    <p>(none)</p>
+  <% end %>
   <% @user.pending.each do |invitation| %>
     <%= render partial: "events/event", locals: {event: invitation.event} %>
     <%= link_to "Accept", accept_path(invitation.id), method: :patch %>
@@ -16,29 +19,78 @@
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
-<h1><%= @user.name %>'s hosted events</h1>
-<% @user.events.each do |event| %>
-  <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
-  <%= render partial: "events/invited", locals: { event: event } %>
-  <%= link_to "Event page", event_path %>
-  <br>
+<h1>Upcoming Events</h1>
+<h3><%= @user.name %>'s hosted events</h3>
+<% if @user.events.upcoming.empty? %>
+  <p>(none)</p>
 <% end %>
-<h1><%= @user.name %>'s accepted invitations</h1>
+<% @user.events.upcoming.each do |event| %>
+  <div class="userinfo">
+    <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
+    <%# render partial: "events/invited", locals: { event: event } %>
+    <%= link_to "Event page", event_path(event.id) %>
+    <br>
+  </div>
+<% end %>
+<h3><%= @user.name %>'s accepted invitations</h3>
+<% if @user.accepted.empty? %>
+  <p>(none)</p>
+<% end %>
+<% if @user.accepted.empty? || @user.accepted.all?{|inv| inv.past? }%>
+  <p>(none)</p>
+<% end %>
 <% @user.accepted.each do |inv| %>
-  <% event = inv.event %>
-  <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
-  <%= link_to "Unaccept Event", unaccept_path(inv), method: :patch %>
-  <%= link_to "Event page", event_path %>
-  <br>
+  <% next if inv.past? %>
+  <div class="userinfo">
+    <% event = inv.event %>
+    <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
+    <%= link_to "Unaccept Event", unaccept_path(inv), method: :patch %>
+    <%= link_to "Event page", event_path(event.id) %>
+  </div>
+
 <% end %>
-<h1><%= @user.name %>'s pending events</h1>
+<h3><%= @user.name %>'s pending events</h3>
+<% if @user.pending.empty? %>
+  <p>(none)</p>
+<% end %>
 <% @user.pending.each do |inv| %>
-  <% event = inv.event %>
-  <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
-  <%= link_to "Accept Event", accept_path(inv), method: :patch %>
-  <%= link_to "Event page", event_path, method: :patch %>
-  <br>
+  <% next if inv.past? %>
+  <div class="userinfo">
+    <% event = inv.event %>
+    <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
+    <%= link_to "Accept Event", accept_path(inv), method: :patch %>
+    <%= link_to "Event page", event_path(event.id) %>
+    <br>
+  </div>
+  
+<% end %>
+<h1>Previous Events</h1>
+<% if @user.events.previous.empty? %>
+  <p>(none)</p>
+<% end %>
+<% @user.events.previous.each do |event| %>
+  <div class="userinfo">
+    <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
+    <%# render partial: "events/invited", locals: { event: event } %>
+    <%= link_to "Event page", event_path(event.id) %>
+    <br>
+  </div>
+<% end %>
+<h1>Previous Invitations</h1>
+<% if @user.invites.empty? %>
+  <p>(none)</p>
+<% end %>
+<% @user.invites.each do |inv| %>
+  <% next if inv.future? %>
+  <div class="userinfo">
+    <% event = inv.event %>
+    <%= content_tag(:div, "#{event.name}, #{event.place}, #{event.time}") %>
+    <%= content_tag(:div, "Accepted? #{inv.accepted}") %>
+    <%= link_to "Event page", event_path(event.id) %>
+    <br>
+  </div>
+  
 <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %> 
+<%= link_to 'Edit my profile', edit_user_path(@user) %> |
+<%= link_to 'Back to all users', users_path %> 

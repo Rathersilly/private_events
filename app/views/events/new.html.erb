@@ -1,1 +1,1 @@
-<%= render 'form', submit_msg: "Create Event" %>
+<%= render partial: 'form', locals: {path_name: events_path, method_name: :post, submit_msg: "Create Event"} %>
